@@ -42,7 +42,7 @@ static int __init ram_init(void)
     printk(KERN_INFO "Module loaded...\n");
     proc_create(filename, 0, NULL, &fops);
     printk(KERN_INFO "Device file created: /proc/%s.\n", filename);
-    printk(KERN_INFO "Buenas, att: Grupo 4, monitor de memoria")
+    printk(KERN_INFO "Buenas, att: Grupo 4, monitor de memoria");
     return 0;
 }
 
@@ -50,7 +50,7 @@ static void __exit ram_exit(void)
 {
     remove_proc_entry(filename, NULL);
     printk(KERN_INFO "Module removed...\n");
-    printk(KERN_INFO "Bai, att: Grupo 4 y este fue el monitor de memoria")
+    printk(KERN_INFO "Bai, att: Grupo 4 y este fue el monitor de memoria");
 }
 
 module_init(ram_init);
