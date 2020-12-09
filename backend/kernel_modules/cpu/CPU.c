@@ -27,21 +27,31 @@ static int show_cpu_info(struct seq_file *f, void *v) {
         seq_printf(f, "{\n\t\"root\":[\n");
 	for_each_process(task){
                 long ram = 0L;
+                int status = 0;
                 if((task->mm)!= NULL) {
                         ram = ((task->mm)->total_vm * pagesize) / 1024; // number of pages times pagesize. In Mb
 		        printk( "ram: %ld;", ram);
                 }
-                seq_printf(f, "\t\t{\n\t\t\t\"PID\":\"%d\",\n\t\t\t\"nombre\":\"%s\",\n\t\t\t\"usuario\":\"%d\",\n\t\t\t\"estado\":\"%ld\",\n\t\t\t\"RAM\":\"%ld\",\n\t\t\t\"children\":\n", task->pid, task->comm, task->cred->uid.val, task->state, ram);
+                if((task->thread_info)!= NULL) {
+                        status = (task->thread_info)->status;
+		        printk( "status: %d;", status);
+                }
+                seq_printf(f, "\t\t{\n\t\t\t\"PID\":\"%d\",\n\t\t\t\"nombre\":\"%s\",\n\t\t\t\"usuario\":\"%d\",\n\t\t\t\"estado\":\"%ld\",\n\t\t\t\"RAM\":\"%ld\",\n\t\t\t\"children\":\n", task->pid, task->comm, task->cred->uid.val, status, ram);
                 //Procesos Hijos
                 seq_printf(f, "\t\t\t\t[\n");
                 list_for_each(list, &task->children){
                         long child_ram = 0L;
+                        int child_status = 0;
                         task_child = list_entry(list, struct task_struct, sibling);
                         if((task_child->mm)!= NULL) {
                                 child_ram = ((task_child->mm)->total_vm * pagesize) / 1024; // number of pages times pagesize. In Mb
 		                printk( "child ram: %ld;", child_ram);
                         }
-                        seq_printf(f, "\t\t\t\t{\n\t\t\t\t\t\"PID\":\"%d\",\n\t\t\t\t\t\"nombre\":\"%s\",\n\t\t\t\t\t\"usuario\":\"%d\",\n\t\t\t\t\t\"estado\":\"%ld\",\n\t\t\t\t\t\"RAM\":\"%ld\"\n\t\t\t\t},\n", task_child->pid, task_child->comm, task_child->cred->uid.val, task_child->state, child_ram);
+                        if((task_child->thread_info)!= NULL) {
+                                child_status = (task_child->thread_info)->status;
+                                printk( "child_status: %d;", child_status);
+                        }
+                        seq_printf(f, "\t\t\t\t{\n\t\t\t\t\t\"PID\":\"%d\",\n\t\t\t\t\t\"nombre\":\"%s\",\n\t\t\t\t\t\"usuario\":\"%d\",\n\t\t\t\t\t\"estado\":\"%ld\",\n\t\t\t\t\t\"RAM\":\"%ld\"\n\t\t\t\t},\n", task_child->pid, task_child->comm, task_child->cred->uid.val, child_status, child_ram);
                 }
                 seq_printf(f, "\t\t\t\t]\n");
                 seq_printf(f, "\t\t\t},\n");

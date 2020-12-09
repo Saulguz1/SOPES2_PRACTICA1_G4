@@ -5,120 +5,120 @@
 			"nombre":"systemd",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"23004",
+			"RAM":"22",
 			"children":
 				[
 				{
 					"PID":"224",
 					"nombre":"systemd-journal",
 					"usuario":"0",
-					"estado":"0",
-					"RAM":"0"
+					"estado":"1",
+					"RAM":"39"
 				},
 				{
 					"PID":"234",
 					"nombre":"systemd-udevd",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"19"
 				},
 				{
 					"PID":"288",
 					"nombre":"haveged",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"7"
 				},
 				{
 					"PID":"315",
 					"nombre":"dbus-daemon",
 					"usuario":"104",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"8"
 				},
 				{
 					"PID":"313",
 					"nombre":"dhclient",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"9"
 				},
 				{
 					"PID":"369",
 					"nombre":"google_osconfig",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"116"
 				},
 				{
 					"PID":"372",
 					"nombre":"unattended-upgr",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"27"
 				},
 				{
 					"PID":"374",
 					"nombre":"chronyd",
 					"usuario":"106",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"12"
 				},
 				{
 					"PID":"375",
 					"nombre":"agetty",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"2"
 				},
 				{
 					"PID":"378",
 					"nombre":"agetty",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"4"
 				},
 				{
 					"PID":"419",
 					"nombre":"google_guest_ag",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"111"
 				},
 				{
 					"PID":"508",
 					"nombre":"sshd",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"15"
 				},
 				{
 					"PID":"515",
 					"nombre":"systemd-logind",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"19"
 				},
 				{
 					"PID":"518",
 					"nombre":"cron",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"7"
 				},
 				{
 					"PID":"9944",
 					"nombre":"systemd",
 					"usuario":"1000",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"20"
 				},
 				{
-					"PID":"10074",
+					"PID":"13316",
 					"nombre":"rsyslogd",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"220"
 				},
 				]
 			},
@@ -162,7 +162,7 @@
 					"PID":"9",
 					"nombre":"ksoftirqd/0",
 					"usuario":"0",
-					"estado":"0",
+					"estado":"1",
 					"RAM":"0"
 				},
 				{
@@ -183,7 +183,7 @@
 					"PID":"12",
 					"nombre":"migration/0",
 					"usuario":"0",
-					"estado":"0",
+					"estado":"1",
 					"RAM":"0"
 				},
 				{
@@ -204,14 +204,14 @@
 					"PID":"16",
 					"nombre":"migration/1",
 					"usuario":"0",
-					"estado":"1",
+					"estado":"0",
 					"RAM":"0"
 				},
 				{
 					"PID":"17",
 					"nombre":"ksoftirqd/1",
 					"usuario":"0",
-					"estado":"1",
+					"estado":"0",
 					"RAM":"0"
 				},
 				{
@@ -355,13 +355,6 @@
 					"RAM":"0"
 				},
 				{
-					"PID":"143",
-					"nombre":"kworker/u4:2",
-					"usuario":"0",
-					"estado":"1026",
-					"RAM":"0"
-				},
-				{
 					"PID":"152",
 					"nombre":"kworker/0:1H",
 					"usuario":"0",
@@ -432,15 +425,22 @@
 					"RAM":"0"
 				},
 				{
-					"PID":"10078",
-					"nombre":"kworker/1:0",
+					"PID":"11110",
+					"nombre":"kworker/u4:0",
 					"usuario":"0",
 					"estado":"1026",
 					"RAM":"0"
 				},
 				{
-					"PID":"11110",
-					"nombre":"kworker/u4:0",
+					"PID":"13236",
+					"nombre":"kworker/1:2",
+					"usuario":"0",
+					"estado":"1026",
+					"RAM":"0"
+				},
+				{
+					"PID":"15369",
+					"nombre":"kworker/u4:2",
 					"usuario":"0",
 					"estado":"1026",
 					"RAM":"0"
@@ -491,7 +491,7 @@
 			"PID":"9",
 			"nombre":"ksoftirqd/0",
 			"usuario":"0",
-			"estado":"0",
+			"estado":"1",
 			"RAM":"0",
 			"children":
 				[
@@ -521,7 +521,7 @@
 			"PID":"12",
 			"nombre":"migration/0",
 			"usuario":"0",
-			"estado":"0",
+			"estado":"1",
 			"RAM":"0",
 			"children":
 				[
@@ -551,7 +551,7 @@
 			"PID":"16",
 			"nombre":"migration/1",
 			"usuario":"0",
-			"estado":"1",
+			"estado":"0",
 			"RAM":"0",
 			"children":
 				[
@@ -561,7 +561,7 @@
 			"PID":"17",
 			"nombre":"ksoftirqd/1",
 			"usuario":"0",
-			"estado":"1",
+			"estado":"0",
 			"RAM":"0",
 			"children":
 				[
@@ -768,16 +768,6 @@
 				]
 			},
 		{
-			"PID":"143",
-			"nombre":"kworker/u4:2",
-			"usuario":"0",
-			"estado":"1026",
-			"RAM":"0",
-			"children":
-				[
-				]
-			},
-		{
 			"PID":"152",
 			"nombre":"kworker/0:1H",
 			"usuario":"0",
@@ -841,8 +831,8 @@
 			"PID":"224",
 			"nombre":"systemd-journal",
 			"usuario":"0",
-			"estado":"1",
-			"RAM":"40452",
+			"estado":"0",
+			"RAM":"39",
 			"children":
 				[
 				]
@@ -852,7 +842,7 @@
 			"nombre":"systemd-udevd",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"20476",
+			"RAM":"19",
 			"children":
 				[
 				]
@@ -862,7 +852,7 @@
 			"nombre":"haveged",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"8084",
+			"RAM":"7",
 			"children":
 				[
 				]
@@ -872,7 +862,7 @@
 			"nombre":"dhclient",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"9488",
+			"RAM":"9",
 			"children":
 				[
 				]
@@ -882,7 +872,7 @@
 			"nombre":"dbus-daemon",
 			"usuario":"104",
 			"estado":"1",
-			"RAM":"8792",
+			"RAM":"8",
 			"children":
 				[
 				]
@@ -892,7 +882,7 @@
 			"nombre":"google_osconfig",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"119740",
+			"RAM":"116",
 			"children":
 				[
 				]
@@ -902,7 +892,7 @@
 			"nombre":"unattended-upgr",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"28404",
+			"RAM":"27",
 			"children":
 				[
 				]
@@ -912,7 +902,7 @@
 			"nombre":"chronyd",
 			"usuario":"106",
 			"estado":"1",
-			"RAM":"13012",
+			"RAM":"12",
 			"children":
 				[
 				{
@@ -920,7 +910,7 @@
 					"nombre":"chronyd",
 					"usuario":"106",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"4"
 				},
 				]
 			},
@@ -929,7 +919,7 @@
 			"nombre":"agetty",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"2648",
+			"RAM":"2",
 			"children":
 				[
 				]
@@ -939,7 +929,7 @@
 			"nombre":"chronyd",
 			"usuario":"106",
 			"estado":"1",
-			"RAM":"4816",
+			"RAM":"4",
 			"children":
 				[
 				]
@@ -949,7 +939,7 @@
 			"nombre":"agetty",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"4172",
+			"RAM":"4",
 			"children":
 				[
 				]
@@ -959,7 +949,7 @@
 			"nombre":"google_guest_ag",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"114296",
+			"RAM":"111",
 			"children":
 				[
 				]
@@ -969,7 +959,7 @@
 			"nombre":"sshd",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"15852",
+			"RAM":"15",
 			"children":
 				[
 				{
@@ -977,7 +967,7 @@
 					"nombre":"sshd",
 					"usuario":"0",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"16"
 				},
 				]
 			},
@@ -986,7 +976,7 @@
 			"nombre":"systemd-logind",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"19524",
+			"RAM":"19",
 			"children":
 				[
 				]
@@ -996,7 +986,7 @@
 			"nombre":"cron",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"7264",
+			"RAM":"7",
 			"children":
 				[
 				]
@@ -1036,7 +1026,7 @@
 			"nombre":"sshd",
 			"usuario":"0",
 			"estado":"1",
-			"RAM":"16600",
+			"RAM":"16",
 			"children":
 				[
 				{
@@ -1044,7 +1034,7 @@
 					"nombre":"sshd",
 					"usuario":"1000",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"16"
 				},
 				]
 			},
@@ -1053,7 +1043,7 @@
 			"nombre":"systemd",
 			"usuario":"1000",
 			"estado":"1",
-			"RAM":"21024",
+			"RAM":"20",
 			"children":
 				[
 				{
@@ -1061,7 +1051,7 @@
 					"nombre":"(sd-pam)",
 					"usuario":"1000",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"23"
 				},
 				]
 			},
@@ -1070,7 +1060,7 @@
 			"nombre":"(sd-pam)",
 			"usuario":"1000",
 			"estado":"1",
-			"RAM":"23968",
+			"RAM":"23",
 			"children":
 				[
 				]
@@ -1090,7 +1080,7 @@
 			"nombre":"sshd",
 			"usuario":"1000",
 			"estado":"1",
-			"RAM":"16600",
+			"RAM":"16",
 			"children":
 				[
 				{
@@ -1098,7 +1088,7 @@
 					"nombre":"bash",
 					"usuario":"1000",
 					"estado":"1",
-					"RAM":"0"
+					"RAM":"5"
 				},
 				]
 			},
@@ -1107,36 +1097,16 @@
 			"nombre":"bash",
 			"usuario":"1000",
 			"estado":"1",
-			"RAM":"5884",
+			"RAM":"5",
 			"children":
 				[
 				{
-					"PID":"13155",
+					"PID":"15383",
 					"nombre":"cat",
 					"usuario":"1000",
 					"estado":"0",
-					"RAM":"0"
+					"RAM":"3"
 				},
-				]
-			},
-		{
-			"PID":"10074",
-			"nombre":"rsyslogd",
-			"usuario":"0",
-			"estado":"1",
-			"RAM":"225824",
-			"children":
-				[
-				]
-			},
-		{
-			"PID":"10078",
-			"nombre":"kworker/1:0",
-			"usuario":"0",
-			"estado":"1026",
-			"RAM":"0",
-			"children":
-				[
 				]
 			},
 		{
@@ -1150,11 +1120,41 @@
 				]
 			},
 		{
-			"PID":"13155",
+			"PID":"13236",
+			"nombre":"kworker/1:2",
+			"usuario":"0",
+			"estado":"1026",
+			"RAM":"0",
+			"children":
+				[
+				]
+			},
+		{
+			"PID":"13316",
+			"nombre":"rsyslogd",
+			"usuario":"0",
+			"estado":"1",
+			"RAM":"220",
+			"children":
+				[
+				]
+			},
+		{
+			"PID":"15369",
+			"nombre":"kworker/u4:2",
+			"usuario":"0",
+			"estado":"1026",
+			"RAM":"0",
+			"children":
+				[
+				]
+			},
+		{
+			"PID":"15383",
 			"nombre":"cat",
 			"usuario":"1000",
 			"estado":"0",
-			"RAM":"3988",
+			"RAM":"3",
 			"children":
 				[
 				]
