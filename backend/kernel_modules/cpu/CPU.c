@@ -25,7 +25,7 @@ static const char *filename = "p_grupo4";
 static int show_cpu_info(struct seq_file *f, void *v) {
         seq_printf(f, "pagesize : %d\n", pagesize);
         //Procesos Padre
-        seq_printf(f, "{\n\t[\n");
+        seq_printf(f, "{\n\t\"root\":[\n");
 	for_each_process(task){
                 // int ram = 0;
                 // ram = (task->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
