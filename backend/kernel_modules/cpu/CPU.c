@@ -27,23 +27,23 @@ static int show_cpu_info(struct seq_file *f, void *v) {
         //Procesos Padre
         seq_printf(f, "{\n\t[\n\t");
 	for_each_process(task){
-                int ram = 0;
+                // int ram = 0;
                 // ram = (task->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
-                if (task->active_mm->total_vm == NULL) {
-                        continue;
-                }
-                seq_printf(f, "total_vm : %lud\n", task->active_mm->total_vm);
-                // seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%s\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%ld\",\n\t\"RAM\":\"%d\"\n,\n\t\"children\":\n", task->pid, task->comm, task->cred->uid.val, task->state, ram);
-                // //Procesos Hijos
-                // seq_printf(f, "[\n\t");
-                // list_for_each(list, &task->children){
-                //         int child_ram = 0;
-                //         task_child = list_entry(list, struct task_struct, sibling);
-                //         child_ram = (task_child->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
-                //         seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%s\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%ld\",\n\t\"RAM\":\"%d\"\n},\n", task_child->pid, task_child->comm, task_child->cred->uid.val, task_child->state, child_ram);
+                // if (task->active_mm->total_vm == NULL) {
+                //         continue;
                 // }
-                // seq_printf(f, "]\n");
-                // seq_printf(f, "},\n");
+                // seq_printf(f, "total_vm : %lud\n", task->active_mm->total_vm);
+                seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%s\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%ld\",\n\t\"RAM\":\"%d\"\n,\n\t\"children\":\n", task->pid, task->comm, task->cred->uid.val, task->state, 10);
+                //Procesos Hijos
+                seq_printf(f, "[\n\t");
+                list_for_each(list, &task->children){
+                        // int child_ram = 0;
+                        task_child = list_entry(list, struct task_struct, sibling);
+                        // child_ram = (task_child->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
+                        seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%s\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%ld\",\n\t\"RAM\":\"%d\"\n},\n", task_child->pid, task_child->comm, task_child->cred->uid.val, task_child->state, 10);
+                }
+                seq_printf(f, "]\n");
+                seq_printf(f, "},\n");
 	}
         seq_printf(f, "]\n}\n");
         return 0;
