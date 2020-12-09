@@ -21,7 +21,7 @@ static int show_memory_info(struct seq_file *f, void *v)
     used = total - freeram;
     usage_percentage = (100 * used) / total;
     // Values in Mb
-    seq_printf(f, "{\n\t\"total\":\"%d\",\n\t\"used\":\"%d\",\n\t\"usage_percentage\":\"%d\"\n}\n", total, used, usage_percentage);
+    seq_printf(f, "{\n\t\"total\":\"%d\",\n\t\"used\":\"%d\",\n\t\"free\":\"%d\",\n\t\"usage_percentage\":\"%d\"\n}\n", total, used, freeram, usage_percentage);
     return 0;
 }
 
