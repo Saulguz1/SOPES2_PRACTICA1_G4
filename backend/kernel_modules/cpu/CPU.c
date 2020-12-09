@@ -17,12 +17,12 @@
 struct task_struct *task;
 struct task_struct *task_child;
 struct list_head *list;
-static const long pagesize = 4096;  // in Kb
+static const int pagesize = 4096;  // in Kb
 
 static const char *filename = "p_grupo4";
 
 static int show_cpu_info(struct seq_file *f, void *v) {
-        seq_printf(f, "pagesize : %ld\n\t", pagesize);
+        seq_printf(f, "pagesize : %d\n\t", pagesize);
         int ram;
         //Procesos Padre
         seq_printf(f, "{\n\t[\n\t");
