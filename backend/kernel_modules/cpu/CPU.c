@@ -12,41 +12,35 @@
 #include <asm/uaccess.h> 
 #include <linux/hugetlb.h>
 #include <linux/sched/signal.h>
-#include <linux/sched.h>
-#include <unistd.h>
- 
-
+#include <linux/sched.h> 
 
 struct task_struct *task;
 struct task_struct *task_child;
 struct list_head *list;
-static const long pagesize sysconf(_SC_PAGE_SIZE) / 1024;  // in Kb
 static const long pagesize2 = sysconf(_SC_PAGESIZE) / 1024;  // in Kb
 
 static const char *filename = "m_grupo4";
 
 static int show_cpu_info(struct seq_file *f, void *v) {
-        seq_printf(f, "pagesize: %ld\n\t", pagesize);
         seq_printf(f, "pagesize 2: %ld\n\t", pagesize2);
         long ram;
         //Procesos Padre
-        seq_printf(f, "{\n\t[\n\t")
+        seq_printf(f, "{\n\t[\n\t");
 	for_each_process(task){
                 ram = (task->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
-                
                 seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%d\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%d\",\n\t\"RAM\":\"%dd\"\n,\n\t\"children\":\n", task->pid, task->comm, task->uid, task->state, ram);
                 long child_ram;
                 //Procesos Hijos
                 seq_printf(f, "[\n\t");
                 list_for_each(list, &task->children){
                         task_child = list_entry(list, struct task_struct, sibling);
-                        ram = (task_child->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
+                        child_ram = (task_child->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
                         seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%d\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%d\",\n\t\"RAM\":\"%ld\"\n},\n", task_child->pid, task_child->comm, task_child->uid, task_child->state, child_ram);
                 }
-                seq_printf(f, "]\n")
-                seq_printf(f, "},\n")
+                seq_printf(f, "]\n");
+                seq_printf(f, "},\n");
 	}
-        seq_printf(f, "]\n}\n")
+        seq_printf(f, "]\n}\n");
         return 0;
 }
 
@@ -72,7 +66,7 @@ static int __init iniciar(void)
         printk(KERN_INFO "Module loaded...\n");
         proc_create(filename, 0, NULL, &fops);
         printk(KERN_INFO "Device file created: /proc/%s.\n", filename);
-        printk(KERN_INFO "Buenas, att: Grupo 4, monitor de procesos")
+        printk(KERN_INFO "Buenas, att: Grupo 4, monitor de procesos");
         return 0;
 }
 
@@ -83,7 +77,7 @@ static void __exit terminar(void)
 {
 	remove_proc_entry(filename,NULL);
   	printk(KERN_INFO "Module removed...\n");
-        printk(KERN_INFO "Bai, att: Grupo 4 y este fue el monitor de procesos.")
+        printk(KERN_INFO "Bai, att: Grupo 4 y este fue el monitor de procesos.");
 }
 
 module_init(iniciar);
