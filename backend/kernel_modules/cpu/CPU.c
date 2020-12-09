@@ -17,25 +17,25 @@
 struct task_struct *task;
 struct task_struct *task_child;
 struct list_head *list;
-static const long pagesize2 = sysconf(_SC_PAGESIZE) / 1024;  // in Kb
+static const long pagesize = 4096;  // in Kb
 
 static const char *filename = "m_grupo4";
 
 static int show_cpu_info(struct seq_file *f, void *v) {
-        seq_printf(f, "pagesize 2: %ld\n\t", pagesize2);
+        seq_printf(f, "pagesize : %ld\n\t", pagesize);
         long ram;
         //Procesos Padre
         seq_printf(f, "{\n\t[\n\t");
 	for_each_process(task){
                 ram = (task->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
-                seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%d\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%d\",\n\t\"RAM\":\"%dd\"\n,\n\t\"children\":\n", task->pid, task->comm, task->uid, task->state, ram);
+                seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%d\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%d\",\n\t\"RAM\":\"%dd\"\n,\n\t\"children\":\n", task->pid, task->comm, task->user->uid, task->state, ram);
                 long child_ram;
                 //Procesos Hijos
                 seq_printf(f, "[\n\t");
                 list_for_each(list, &task->children){
                         task_child = list_entry(list, struct task_struct, sibling);
                         child_ram = (task_child->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
-                        seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%d\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%d\",\n\t\"RAM\":\"%ld\"\n},\n", task_child->pid, task_child->comm, task_child->uid, task_child->state, child_ram);
+                        seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%d\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%d\",\n\t\"RAM\":\"%ld\"\n},\n", task_child->pid, task_child->comm, task_child->user->uid, task_child->state, child_ram);
                 }
                 seq_printf(f, "]\n");
                 seq_printf(f, "},\n");
@@ -57,10 +57,6 @@ static struct file_operations fops =
         .release = single_release,
 };
 
-
-/**
-*	Defino que es lo que se va a hacer al cargar el modulo
-*/
 static int __init iniciar(void)
 {
         printk(KERN_INFO "Module loaded...\n");
@@ -70,9 +66,6 @@ static int __init iniciar(void)
         return 0;
 }
 
-/**
-*	Defino que es lo que se va a hacer al terminar el modulo
-*/
 static void __exit terminar(void)
 {
 	remove_proc_entry(filename,NULL);
