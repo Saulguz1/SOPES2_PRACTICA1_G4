@@ -62,7 +62,7 @@ static int __init iniciar(void)
         printk(KERN_INFO "Module loaded...\n");
         proc_create(filename, 0, NULL, &fops);
         printk(KERN_INFO "Device file created: /proc/%s.\n", filename);
-        printk(KERN_INFO "Buenas, att: Grupo 4, monitor de procesos");
+        printk(KERN_INFO "Buenas, att. Grupo 4, monitor de procesos");
         return 0;
 }
 
@@ -70,7 +70,7 @@ static void __exit terminar(void)
 {
 	remove_proc_entry(filename,NULL);
   	printk(KERN_INFO "Module removed...\n");
-        printk(KERN_INFO "Bai, att: Grupo 4 y este fue el monitor de procesos.");
+        printk(KERN_INFO "Bai, att. Grupo 4 y este fue el monitor de procesos.");
 }
 
 module_init(iniciar);
