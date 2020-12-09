@@ -27,7 +27,7 @@ static int show_cpu_info(struct seq_file *f, void *v) {
         seq_printf(f, "{\n\t\"root\":[\n");
 	for_each_process(task){
                 long ram = 0L;
-                int status = 0;
+                long status = 0L;
                 if((task->mm)!= NULL) {
                         ram = ((task->mm)->total_vm * pagesize) / 1024; // number of pages times pagesize. In Mb
 		        printk( "ram: %ld;", ram);
@@ -40,7 +40,7 @@ static int show_cpu_info(struct seq_file *f, void *v) {
                 seq_printf(f, "\t\t\t\t[\n");
                 list_for_each(list, &task->children){
                         long child_ram = 0L;
-                        int child_status = 0;
+                        long child_status = 0L;
                         task_child = list_entry(list, struct task_struct, sibling);
                         if((task_child->mm)!= NULL) {
                                 child_ram = ((task_child->mm)->total_vm * pagesize) / 1024; // number of pages times pagesize. In Mb
