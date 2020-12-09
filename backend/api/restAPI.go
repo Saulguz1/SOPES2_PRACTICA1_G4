@@ -9,8 +9,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var ramFilePath = "/proc/m_grupo4.txt"
-var cpuFilePath = "/proc/p_grupo4.txt"
+var ramFilePath = "/proc/m_grupo4"
+var cpuFilePath = "/proc/p_grupo4"
 
 func home(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "SO2 Practica 1.")
@@ -41,7 +41,7 @@ func getCPU(w http.ResponseWriter, r *http.Request) {
 	content, err := ioutil.ReadFile(cpuFilePath)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
-		log.Print("Error reading /proc/P_grupo4 file.")
+		log.Print("Error reading /proc/p_grupo4 file.")
 		fmt.Fprintf(w, "Error reading CPU file!")
 		return
 	}
