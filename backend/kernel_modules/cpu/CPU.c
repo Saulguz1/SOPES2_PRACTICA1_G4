@@ -33,7 +33,7 @@ static int show_cpu_info(struct seq_file *f, void *v) {
 		        printk( "ram: %ld;", ram);
                 }
                 status = task->state;
-                printk( "status: %ld;", status);
+                //printk( "status: %ld;", status);
 
                 seq_printf(f, "\t\t{\n\t\t\t\"PID\":\"%d\",\n\t\t\t\"nombre\":\"%s\",\n\t\t\t\"usuario\":\"%d\",\n\t\t\t\"estado\":\"%ld\",\n\t\t\t\"RAM\":\"%ld\",\n\t\t\t\"children\":\n", task->pid, task->comm, task->cred->uid.val, status, ram);
                 //Procesos Hijos
@@ -48,7 +48,7 @@ static int show_cpu_info(struct seq_file *f, void *v) {
                         }
                         
                         child_status = task_child->state;
-                        printk( "child_status: %ld;", child_status);
+                        //printk( "child_status: %ld;", child_status);
                         seq_printf(f, "\t\t\t\t{\n\t\t\t\t\t\"PID\":\"%d\",\n\t\t\t\t\t\"nombre\":\"%s\",\n\t\t\t\t\t\"usuario\":\"%d\",\n\t\t\t\t\t\"estado\":\"%ld\",\n\t\t\t\t\t\"RAM\":\"%ld\"\n\t\t\t\t},\n", task_child->pid, task_child->comm, task_child->cred->uid.val, child_status, child_ram);
                 }
                 seq_printf(f, "\t\t\t\t]\n");
