@@ -28,7 +28,10 @@ static int show_cpu_info(struct seq_file *f, void *v) {
 	for_each_process(task){
                 int ram = 0;
                 // ram = (task->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
-                seq_printf(f, "total_vm : %d\n", task->mm->total_vm);
+                if (task->mm->total_vm == NULL) {
+                        continue;
+                }
+                seq_printf(f, "total_vm : %lud\n", task->mm->total_vm);
                 // seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%s\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%ld\",\n\t\"RAM\":\"%d\"\n,\n\t\"children\":\n", task->pid, task->comm, task->cred->uid.val, task->state, ram);
                 // //Procesos Hijos
                 // seq_printf(f, "[\n\t");
