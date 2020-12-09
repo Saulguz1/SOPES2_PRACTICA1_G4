@@ -42,8 +42,8 @@ static int show_cpu_info(struct seq_file *f, void *v) {
                         // child_ram = (task_child->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
                         seq_printf(f, "{\n\t\t\t\t\t\"PID\":\"%d\",\n\t\t\t\t\t\"nombre\":\"%s\",\n\t\t\t\t\t\"usuario\":\"%d\",\n\t\t\t\t\t\"estado\":\"%ld\",\n\t\t\t\t\t\"RAM\":\"%d\"\n\t\t\t\t\t},\n\t\t\t\t", task_child->pid, task_child->comm, task_child->cred->uid.val, task_child->state, 10);
                 }
-                seq_printf(f, "]\n\t\t\t\t");
-                seq_printf(f, "},\n\t\t\t\t");
+                seq_printf(f, "]\n\t\t\t");
+                seq_printf(f, "},\n\t\t");
 	}
         seq_printf(f, "]\n\t}\n\t\t");
         return 0;
