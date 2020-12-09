@@ -22,6 +22,7 @@ static const int pagesize = 4;  // in Kb
 
 static const char *filename = "p_grupo4";
 
+char buffer[256];
 char * get_task_state(long state)
 {
     switch (state) {
