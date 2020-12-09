@@ -28,14 +28,14 @@ static int show_cpu_info(struct seq_file *f, void *v) {
         seq_printf(f, "{\n\t[\n\t");
 	for_each_process(task){
                 ram = (task->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
-                seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%d\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%d\",\n\t\"RAM\":\"%dd\"\n,\n\t\"children\":\n", task->pid, task->comm, task->cred->uid, task->state, ram);
+                seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%s\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%d\",\n\t\"RAM\":\"%dd\"\n,\n\t\"children\":\n", task->pid, task->comm, task->cred->uid.val, task->state, ram);
                 long child_ram;
                 //Procesos Hijos
                 seq_printf(f, "[\n\t");
                 list_for_each(list, &task->children){
                         task_child = list_entry(list, struct task_struct, sibling);
                         child_ram = (task_child->mm->total_vm * pagesize) / 1024;  // number of pages times pagesize in Mb
-                        seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%d\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%d\",\n\t\"RAM\":\"%ld\"\n},\n", task_child->pid, task_child->comm, task_child->cred->uid, task_child->state, child_ram);
+                        seq_printf(f, "{\n\t\"PID\":\"%d\",\n\t\"nombre\":\"%s\",\n\t\"usuario\":\"%d\",\n\t\"estado\":\"%d\",\n\t\"RAM\":\"%ld\"\n},\n", task_child->pid, task_child->comm, task_child->cred->uid.val, task_child->state, child_ram);
                 }
                 seq_printf(f, "]\n");
                 seq_printf(f, "},\n");
