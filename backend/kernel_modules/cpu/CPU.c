@@ -32,12 +32,14 @@ char * get_task_state(long state)
             return "TASK_INTERRUPTIBLE";
         case TASK_UNINTERRUPTIBLE:
             return "TASK_UNINTERRUPTIBLE";
-        case __TASK_STOPPED:
-            return "__TASK_STOPPED";
+        case TASK_STOPPED:
+            return "TASK_STOPPED";
         case __TASK_TRACED:
             return "__TASK_TRACED";
-        case EXIT_ZOMBIE:
-            return "EXIT_ZOMBIE";
+        case TASK_ZOMBIE:
+            return "TASK_ZOMBIE";
+            case TASK_EXCLUSIVE:
+            return "TASK_EXCLUSIVE";
         default:
         {
             printk("Unknown Type:%ld\n", state);
@@ -54,7 +56,7 @@ static int show_cpu_info(struct seq_file *f, void *v) {
                 char * status = "";
                 if((task->mm)!= NULL) {
                         ram = ((task->mm)->total_vm * pagesize) / 1024; // number of pages times pagesize. In Mb
-		        printk( "ram: %ld;", ram);
+		        // printk( "ram: %ld;", ram);
                 }
                 status = get_task_state(task->state);
                 //printk( "status: %ld;", status);
@@ -68,7 +70,7 @@ static int show_cpu_info(struct seq_file *f, void *v) {
                         task_child = list_entry(list, struct task_struct, sibling);
                         if((task_child->mm)!= NULL) {
                                 child_ram = ((task_child->mm)->total_vm * pagesize) / 1024; // number of pages times pagesize. In Mb
-		                printk( "child ram: %ld;", child_ram);
+		                // printk( "child ram: %ld;", child_ram);
                         }
                         
                         child_status = get_task_state(task_child->state);
