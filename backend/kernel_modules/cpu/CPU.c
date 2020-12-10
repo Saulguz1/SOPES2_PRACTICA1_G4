@@ -29,10 +29,8 @@ char * get_task_state(long state)
     switch (state) {
         case TASK_RUNNING:
             return "TASK_RUNNING";
-        case TASK_INTERRUPTIBLE:
-            return "TASK_INTERRUPTIBLE";
-        case TASK_UNINTERRUPTIBLE:
-            return "TASK_UNINTERRUPTIBLE";
+        case TASK_NORMAL:
+            return "SLEEP";
         case TASK_STOPPED:
             return "TASK_STOPPED";
         case __TASK_TRACED:
@@ -43,6 +41,8 @@ char * get_task_state(long state)
             return "EXIT_DEAD";
         case TASK_DEAD:
             return "TASK_DEAD";
+        case TASK_PARKED:
+            return "TASK_PARKED";
         case TASK_IDLE:
             return "TASK_IDLE";
         default:
