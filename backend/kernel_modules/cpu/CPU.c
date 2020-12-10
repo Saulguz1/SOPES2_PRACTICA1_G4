@@ -28,27 +28,29 @@ char * get_task_state(long state)
         //Info -- https://www.ibm.com/developerworks/linux/library/l-task-killable/
     switch (state) {
         case TASK_RUNNING:
-            return "TASK_RUNNING";
+            return "RUNNING";
         case TASK_INTERRUPTIBLE:
             return "SLEEP";
         case TASK_UNINTERRUPTIBLE:
             return "SLEEP";
+        case TASK_WAKING:
+            return "WAKING";
         case __TASK_STOPPED:
-            return "TASK_STOPPED";
+            return "STOPPED";
         case TASK_STOPPED:
-            return "TASK_STOPPED";
+            return "STOPPED";
         case __TASK_TRACED:
-            return "TASK_TRACED";
+            return "TRACED";
         case EXIT_ZOMBIE:
             return "EXIT_ZOMBIE";
         case EXIT_DEAD:
             return "EXIT_DEAD";
         case TASK_DEAD:
-            return "TASK_DEAD";
+            return "DEAD";
         case TASK_PARKED:
-            return "TASK_PARKED";
+            return "PARKED";
         case TASK_IDLE:
-            return "TASK_IDLE";
+            return "IDLE";
         default:
         {
             printk("Unknown Type:%ld\n", state);
