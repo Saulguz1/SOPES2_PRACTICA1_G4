@@ -10,7 +10,7 @@
         <link href="../css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-        
+        <script src="../index.js"></script>
     </head>
     <style>
         body {
@@ -19,8 +19,8 @@
         background-attachment: fixed;
         background-size: cover;
         }
-        </style>
-    <body class="sb-nav-fixed">
+    </style>
+    <body onload="cargarram()" class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="Principal.html">Practica 1</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
@@ -73,16 +73,8 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-
-
-
-
-
-
-
-
+                        
                         <meta http-equiv="refresh" content="5;url=MemoriaRAM.html" />
-
                         <div id="layoutSidenav_content">
                             <main>
                                 <div class="container-fluid">
@@ -94,84 +86,11 @@
                                         </div>
                                         <div class="card-body">
                                             <canvas id="canvas" name="canvas"width="100%" height="30"></canvas></div>
-                                            
-                                            <script>
-                                            var config = {
-                                                type: 'line',
-                                                data: {
-                                                    labels: ["","","",""],
-                                                    datasets: [{
-                                                        label: 'Usada',
-                                                        backgroundColor: '#FFFFFF',
-                                                        borderColor: 'green',
-                                                        data: [1,2,3,5],
-                                                        fill: false,
-                                                    },{
-                                                        label: 'Libre',
-                                                        backgroundColor: '#FFFFFF',
-                                                        borderColor: 'red',
-                                                        data: [4,5,3,9],
-                                                        fill: false,
-                                                    },{
-                                                        label: 'Total',
-                                                        backgroundColor: '#FFFFFF',
-                                                        borderColor: 'blue',
-                                                        data: [7,2,6,7],
-                                                        fill: false,
-                                                    }]
-                                                },
-                                                options: {
-                                                    responsive: true,
-            
-                                                    tooltips: {
-                                                        mode: 'index',
-                                                        intersect: false,
-                                                    },
-                                                    hover: {
-                                                        mode: 'nearest',
-                                                        intersect: true
-                                                    },
-                                                    scales: {
-                                                        xAxes: [{
-                                                            display: true,
-                                                            scaleLabel: {
-                                                                display: true,
-                                                                labelString:'Ram'
-                                                            }
-                                                        }],
-                                                        yAxes: [{
-                                                            display: true,
-                                                            scaleLabel: {
-                                                                display: true,
-                                                                labelString: 'Porcentage'
-                                                            }
-                                                        }]
-                                                    }
-                                                }
-                                            };
-            
-                                            window.onload = function() {
-                                                var ctx = document.getElementById('canvas').getContext('2d');
-                                                window.myLine = new Chart(ctx, config);
-                                            };
-                                        </script>"
-                                        
                                     </div>
                                     </div>
                                 </div>
                             </main>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-                        
+                        </div>                        
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
