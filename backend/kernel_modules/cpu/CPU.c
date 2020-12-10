@@ -25,6 +25,7 @@ static const char *filename = "p_grupo4";
 char buffer[256];
 char * get_task_state(long state)
 {
+        //Info -- https://www.ibm.com/developerworks/linux/library/l-task-killable/
     switch (state) {
         case TASK_RUNNING:
             return "TASK_RUNNING";
@@ -36,10 +37,14 @@ char * get_task_state(long state)
             return "TASK_STOPPED";
         case __TASK_TRACED:
             return "__TASK_TRACED";
-        case TASK_ZOMBIE:
-            return "TASK_ZOMBIE";
-            case TASK_EXCLUSIVE:
-            return "TASK_EXCLUSIVE";
+        case EXIT_ZOMBIE:
+            return "EXIT_ZOMBIE";
+        case EXIT_DEAD:
+            return "EXIT_DEAD";
+        case TASK_DEAD:
+            return "TASK_DEAD";
+        case TASK_IDLE:
+            return "TASK_IDLE";
         default:
         {
             printk("Unknown Type:%ld\n", state);
