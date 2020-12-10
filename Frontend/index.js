@@ -28,7 +28,11 @@ function cargarram(){
         freeram += json.free+","
         
         pintargraph(ejex.split(","),usedram.split(","),totalram.split(","),freeram.split(","))
-
+        
+        document.getElementById("input_used").value = json.used + "  MB"
+        document.getElementById("input_total").value = json.total + "  MB"
+        document.getElementById("input_free").value = json.free + "  MB"
+        
         sessionStorage.setItem("ejex", ejex);
         sessionStorage.setItem("usedram", usedram);
         sessionStorage.setItem("totalram", totalram);
