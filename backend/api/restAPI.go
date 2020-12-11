@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"syscall"
 
@@ -87,6 +88,13 @@ func handleRequests() {
 }
 
 func main() {
+	f, err := os.OpenFile("logs", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	log.SetOutput(f)
+
 	log.Print("REST server up and running...")
 	handleRequests()
 }
