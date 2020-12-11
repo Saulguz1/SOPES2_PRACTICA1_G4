@@ -37,10 +37,6 @@ func getRAM(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, text)
 }
 
-func delChar(s []rune, index int) []rune {
-	return append(s[0:index], s[index+1:]...)
-}
-
 func getCPU(w http.ResponseWriter, r *http.Request) {
 	log.Println("Getting CPU info.")
 
@@ -54,23 +50,9 @@ func getCPU(w http.ResponseWriter, r *http.Request) {
 	}
 
 	text := string(content)
-	log.Println(text)
-
 	s := []rune(text)
-	s[len(text)-7] = 'Z'
+	s[len(text)-7] = ' '
 	log.Println(string(s))
-
-	// in := []byte(text)
-	// var raw map[string]interface{}
-	// if err := json.Unmarshal(in, &raw); err != nil {
-	// 	http.Error(w, err.Error(), 500)
-	// 	log.Print("Error unmarshaling /proc/p_grupo4 file.")
-	// 	fmt.Fprintf(w, "Error unmarshaling file!")
-	// 	return
-	// }
-
-	// out, _ := json.Marshal(raw)
-	// println(string(out))
 
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, string(s))
