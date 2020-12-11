@@ -73,7 +73,7 @@ func getCPU(w http.ResponseWriter, r *http.Request) {
 	// println(string(out))
 
 	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, string(res))
+	fmt.Fprintf(w, string(s))
 }
 
 func killProcess(w http.ResponseWriter, r *http.Request) {
