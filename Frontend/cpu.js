@@ -9,15 +9,16 @@ function cargarcpu(){
     $.ajax({
       type: "GET",
       url: ip+"cpu",
-      dataType: 'text',
+      dataType: 'json',
       error : function(errorThrown,err,textStatus){
         console.log(textStatus)
         console.log(err)
         console.log(errorThrown)
       },
       success : function(data){
-          for(i=2050;i<2141;i++){console.log(data[i])}
-        
+        //console.log(data)
+        LlenarDatos(data)
+        LlenarTabla(data)
       }
     });
 }
@@ -85,11 +86,12 @@ function killproc(PID){
     alert(PID)
     $.ajax({
         url: ip+"kill",
-        type:'POST',
+        type:"POST",
+        dataType: "text",
         headers: {
             "Content-Type": "text/plain"
         },
-        data: PID,
+        data: "".concat(PID),
         success: function(response){
             console.log(response);
         },
@@ -99,20 +101,5 @@ function killproc(PID){
             console.log(errorThrown)
         }
     });
-
-    /*
-    var settings = {
-        "url": "34.69.2.19/kill",
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-          "Content-Type": "text/plain"
-        },
-        "data": "PID",
-    };
-      
-    $.ajax(settings).done(function (response) {
-        console.log(response);
-    });*/
 }
 
