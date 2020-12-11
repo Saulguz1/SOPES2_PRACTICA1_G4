@@ -61,7 +61,7 @@ char * get_task_state(long state)
 
 static int show_cpu_info(struct seq_file *f, void *v) {
         //Procesos Padre
-        seq_printf(f, "{\n\t\"root\":[\n");
+        seq_printf(f, "{\"root\":[");
 	for_each_process(task){
                 long ram = 0L;
                 char * status = "";
@@ -72,9 +72,9 @@ static int show_cpu_info(struct seq_file *f, void *v) {
                 status = get_task_state(task->state);
                 //printk( "status: %ld;", status);
 
-                seq_printf(f, "\t\t{\n\t\t\t\"PID\":\"%d\",\n\t\t\t\"nombre\":\"%s\",\n\t\t\t\"usuario\":\"%d\",\n\t\t\t\"estado\":\"%s\",\n\t\t\t\"RAM\":\"%ld\",\n\t\t\t\"children\":\n", task->pid, task->comm, task->cred->uid.val, status, ram);
+                seq_printf(f, "{\"PID\":\"%d\",\"nombre\":\"%s\",\"usuario\":\"%d\",\"estado\":\"%s\",\"RAM\":\"%ld\",\"children\":", task->pid, task->comm, task->cred->uid.val, status, ram);
                 //Procesos Hijos
-                seq_printf(f, "\t\t\t\t[\n");
+                seq_printf(f, "[");
                 list_for_each(list, &task->children){
                         long child_ram = 0L;
                         char * child_status = "";
@@ -86,12 +86,12 @@ static int show_cpu_info(struct seq_file *f, void *v) {
                         
                         child_status = get_task_state(task_child->state);
                         //printk( "child_status: %ld;", child_status);
-                        seq_printf(f, "\t\t\t\t{\n\t\t\t\t\t\"PID\":\"%d\",\n\t\t\t\t\t\"nombre\":\"%s\",\n\t\t\t\t\t\"usuario\":\"%d\",\n\t\t\t\t\t\"estado\":\"%s\",\n\t\t\t\t\t\"RAM\":\"%ld\"\n\t\t\t\t},\n", task_child->pid, task_child->comm, task_child->cred->uid.val, child_status, child_ram);
+                        seq_printf(f, "{\"PID\":\"%d\",\"nombre\":\"%s\",\"usuario\":\"%d\",\"estado\":\"%s\",\"RAM\":\"%ld\"},", task_child->pid, task_child->comm, task_child->cred->uid.val, child_status, child_ram);
                 }
-                seq_printf(f, "\t\t\t\t]\n");
-                seq_printf(f, "\t\t\t},\n");
+                seq_printf(f, "]");
+                seq_printf(f, "},");
 	}
-        seq_printf(f, "\t]\n}\n");
+        seq_printf(f, "]}");
         return 0;
 }
 
