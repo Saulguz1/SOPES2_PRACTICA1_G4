@@ -57,8 +57,8 @@ func getCPU(w http.ResponseWriter, r *http.Request) {
 	log.Println(text)
 
 	s := []rune(text)
-	res := delChar(s, 2)
-	log.Println(string(res))
+	s[len(text)-9] = 'Z'
+	log.Println(string(s))
 
 	// in := []byte(text)
 	// var raw map[string]interface{}
