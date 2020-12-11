@@ -5,6 +5,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"strconv"
+	"syscall"
 
 	"github.com/gorilla/mux"
 )
@@ -52,17 +55,46 @@ func getCPU(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, text)
 }
 
+func killProcess(w http.ResponseWriter, r *http.Request) {
+	reqBody, _ := ioutil.ReadAll(r.Body)
+	bodyString := string(reqBody)
+
+	log.Println("Killing process: ", bodyString)
+
+	pidInt, _ := strconv.ParseInt(bodyString, 10, 32)
+	pid := int(pidInt)
+
+	err := syscall.Kill(pid, 9)
+
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		log.Print("Error killing process with PID: ", pid)
+		fmt.Fprintf(w, "Error killing process with PID: %+v", pid)
+		return
+	}
+
+	fmt.Fprintf(w, "Process with PID %+v killed.", pid)
+}
+
 func handleRequests() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", home).Methods("GET")
 	r.HandleFunc("/ram", getRAM).Methods("GET")
 	r.HandleFunc("/cpu", getCPU).Methods("GET")
+	r.HandleFunc("/kill", killProcess).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":80", r))
 }
 
 func main() {
+	f, err := os.OpenFile("logs", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	log.SetOutput(f)
+
 	log.Print("REST server up and running...")
 	handleRequests()
 }
