@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -23,7 +22,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 func getRAM(w http.ResponseWriter, r *http.Request) {
 	log.Println("Getting RAM info.")
 
-	fmt.Println("Opening RAM file ")
+	log.Println("Opening RAM file ")
 	content, err := ioutil.ReadFile(ramFilePath)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
@@ -32,16 +31,20 @@ func getRAM(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	text := string(content)
-	fmt.Println(text)
+	log.Println(text)
 
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, text)
 }
 
+func delChar(s []rune, index int) []rune {
+	return append(s[0:index], s[index+1:]...)
+}
+
 func getCPU(w http.ResponseWriter, r *http.Request) {
 	log.Println("Getting CPU info.")
 
-	fmt.Println("Opening CPU file ")
+	log.Println("Opening CPU file ")
 	content, err := ioutil.ReadFile(cpuFilePath)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
@@ -51,22 +54,26 @@ func getCPU(w http.ResponseWriter, r *http.Request) {
 	}
 
 	text := string(content)
-	fmt.Println(text)
+	log.Println(text)
 
-	in := []byte(text)
-	var raw map[string]interface{}
-	if err := json.Unmarshal(in, &raw); err != nil {
-		http.Error(w, err.Error(), 500)
-		log.Print("Error unmarshaling /proc/p_grupo4 file.")
-		fmt.Fprintf(w, "Error unmarshaling file!")
-		return
-	}
+	s := []rune(text)
+	res := delChar(s, 2)
+	log.Println(string(res))
 
-	out, _ := json.Marshal(raw)
-	println(string(out))
+	// in := []byte(text)
+	// var raw map[string]interface{}
+	// if err := json.Unmarshal(in, &raw); err != nil {
+	// 	http.Error(w, err.Error(), 500)
+	// 	log.Print("Error unmarshaling /proc/p_grupo4 file.")
+	// 	fmt.Fprintf(w, "Error unmarshaling file!")
+	// 	return
+	// }
+
+	// out, _ := json.Marshal(raw)
+	// println(string(out))
 
 	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, string(out))
+	fmt.Fprintf(w, string(res))
 }
 
 func killProcess(w http.ResponseWriter, r *http.Request) {
