@@ -89,8 +89,7 @@ static int show_cpu_info(struct seq_file *f, void *v) {
                         //printk( "child_status: %ld;", child_status);
                         if (counter == 0) {
                             counter = counter + 1;
-                            seq_printf(f, "]");
-                            seq_printf(f, "{\"PID\":\"%d\",\"nombre\":\"%s\",\"usuario\":\"%d\",\"estado\":\"%s\",\"RAM\":\"%ld\"}", task_child->pid, task_child->comm, task_child->cred->uid.val, child_status, child_ram);
+                            seq_printf(f, "{\"PID\":\"%d\",\"nombre\":\"%s\",\"usuario\":\"%d\",\"estado\":\"%s\",\"RAM\":\"%ld\"}" task_child->pid, task_child->comm, task_child->cred->uid.val, child_status, child_ram);
                         } else {
                             seq_printf(f, ",{\"PID\":\"%d\",\"nombre\":\"%s\",\"usuario\":\"%d\",\"estado\":\"%s\",\"RAM\":\"%ld\"}", task_child->pid, task_child->comm, task_child->cred->uid.val, child_status, child_ram);
                         }
