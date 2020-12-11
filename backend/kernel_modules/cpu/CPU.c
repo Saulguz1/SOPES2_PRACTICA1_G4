@@ -73,6 +73,9 @@ static int show_cpu_info(struct seq_file *f, void *v) {
                 status = get_task_state(task->state);
                 //printk( "status: %ld;", status);
 
+                if(strstr(task->comm, "defunct") != NULL) {
+                    printk( "process: %s is zombie!!", task->comm);
+                }
                 seq_printf(f, "{\"PID\":\"%d\",\"nombre\":\"%s\",\"usuario\":\"%d\",\"estado\":\"%s\",\"RAM\":\"%ld\",\"children\":", task->pid, task->comm, task->cred->uid.val, status, ram);
                 //Procesos Hijos
                 seq_printf(f, "[");
