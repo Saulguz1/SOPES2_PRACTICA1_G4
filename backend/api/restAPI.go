@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -48,11 +49,24 @@ func getCPU(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Error reading CPU file!")
 		return
 	}
+
 	text := string(content)
 	fmt.Println(text)
 
+	in := []byte(text)
+	var raw map[string]interface{}
+	if err := json.Unmarshal(in, &raw); err != nil {
+		http.Error(w, err.Error(), 500)
+		log.Print("Error unmarshaling /proc/p_grupo4 file.")
+		fmt.Fprintf(w, "Error unmarshaling file!")
+		return
+	}
+
+	out, _ := json.Marshal(raw)
+	println(string(out))
+
 	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, text)
+	fmt.Fprintf(w, string(out))
 }
 
 func killProcess(w http.ResponseWriter, r *http.Request) {
