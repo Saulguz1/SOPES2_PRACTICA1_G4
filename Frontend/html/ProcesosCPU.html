@@ -10,7 +10,7 @@
         <link href="../css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-        <script src="../index.js"></script>
+        <script src="../cpu.js"></script>
     </head>
     <style>
         body {
@@ -20,7 +20,7 @@
         background-size: cover;
         }
         </style>
-    <body onload="cargarcpu()" class="sb-nav-fixed">
+    <body onload="lee_json()" class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="Principal.html">Practica 1</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
@@ -86,11 +86,13 @@
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-chart-area mr-1"></i>
-                                   Total de Procesos: 
+                                   Total de Procesos: <input id="input_total" class="input" name="input_ejecucion" disabled>
                                 </div>
-                                <div class="card-header">
-                                    <i class="fas fa-chart-area mr-1"></i>
-                                    Procesos en Ejecucion: 0 | Procesos Detenidos: 0 | Procesos Suspendidos: 1 | Procesos Zombies: 1
+                                <div class="card-body">
+                                    <div><b>Procesos en Ejecucion: </b> <input id="input_ejecucion" class="input" name="input_ejecucion" disabled></div>
+                                    <div><b>Procesos Detenidos:</b> <input id="input_detenidos" class="input" name="input_detenidos" disabled></div>
+                                    <div><b>Procesos Suspendidos:</b> <input id="input_suspendidos" class="input" name="input_suspendidos" disabled></div>
+                                    <div><b>Procesos Zombies:</b> <input id="input_zombies" class="input" name="input_zombies" disabled></div>
                                 </div>
                             </div>
                         </div>
@@ -103,9 +105,10 @@
                                 Arbol Procesos.
                             </div>
                             <div class="card-body">
-                            <form method="post" action="hacerkill.html" enctype="multipart/form-data">
+                            <form>
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
                                             <tr>
                                                 <th>PID</th>
                                                 <th>Nombre</th>
@@ -115,31 +118,9 @@
                                                 <th> </th>
                                             </tr>
                                         
-                                        
-                                        <tbody>
-
-                                                <tr style="background-color: greenyellow;">
-                                                <td >123</td>
-                                                <td >system5436</td>
-                                                <td >admins</td>
-                                                <td >Zombie</td>
-                                                <td >5</td>
-                                                <td>
-                                                <button class='btn btn-primary btn-block'  type='submit' name='submit' id='submit' value='123'>KILL</button>
-                                                </td>
-                                                </tr>
-
-                                                <tr style="background-color: darksalmon;">
-                                                    <td >1</td>
-                                                    <td >systemasasdas</td>
-                                                    <td >adminss</td>
-                                                    <td >Suspendido</td>
-                                                    <td >20</td>
-                                                    <td>
-                                                    <button class='btn btn-primary btn-block'  type='submit' name='submit' id='submit' value='1'>KILL</button>
-                                                    </td>
-                                                    </tr>
-                                                                          
+                                        </thead>    
+                                        <tbody id="tbody">
+                                                                         
                                         </tbody>
                                     </table>
                                 </div>

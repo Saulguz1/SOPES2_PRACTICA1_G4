@@ -50,7 +50,47 @@ function cargarcpu(){
   sessionStorage.clear("usedram");
   sessionStorage.clear("totalram");
   sessionStorage.clear("freeram");
-  alert("variables limpiecitas")
+  console.log("cargarcpu")
+  $.ajax({
+    type: "GET",
+    url: ip+"cpu",
+    success : function(data){
+      console.log("data")
+      console.log(data)
+    }
+  });
+}
+
+function LlenarDatos(datos){
+  let toJSON = datos
+  let proccont=0
+  let ejeccont=0
+  let zombiecont=0
+  let stopcont=0
+  let suspendcont=0
+  console.log("data")
+  console.log(datos)
+  return "Success"
+
+  toJSON.forEach(element => {
+    proccont ++
+    if(element.estado == "SLEEP") stopcont ++
+    else if(element.estado == "IDLE") suspendcont ++
+    else if(element.estado == "RUNNING") ejeccont ++
+    else if(element.estado == "ZOMBIE") zombiecont ++
+    element.children.forEach(hijo =>{
+      proccont ++
+      if(hijo.estado == "SLEEP") stopcont ++
+      else if(hijo.estado == "IDLE") suspendcont ++
+      else if(hijo.estado == "RUNNING") ejeccont ++
+      else if(hijo.estado == "ZOMBIE") zombiecont ++
+    });
+  });
+  document.getElementById("input_total").value = proccont
+  document.getElementById("input_ejecucion").value = ejeccont
+  document.getElementById("input_detenidos").value = stopcont
+  document.getElementById("input_suspendidos").value = suspendcont
+  document.getElementById("input_zombies").value = zombiecont
 }
 
 function pintargraph(varejex,varused,vartotal,varfree){
