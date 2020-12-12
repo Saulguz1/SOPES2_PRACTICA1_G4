@@ -11,6 +11,7 @@
     <link href="../css/styles.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="../index.js"></script>
 </head>
 <style>
     body {
@@ -21,7 +22,7 @@
     }
 </style>
 
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed" onload="loadlogin()">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         
     <a class="navbar-brand" style="font-size:50px" href="Login.html"><span style="font-family:Apple Chancery;font-weight: 900;font-size:50px;color:aqua">SOPES2</span>-P1-G4</a>
@@ -67,7 +68,7 @@
                                             </div>
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 
-                                                <button class="btn btn-primary" type="submit" name="submit" id="submit" value="Submit">Login</button>
+                                                <button class="btn btn-primary" type="button" name="submit" id="submit" value="Submit" onclick="login()">Login</button>
                                             </div>
                                         </form>
                                     </div>

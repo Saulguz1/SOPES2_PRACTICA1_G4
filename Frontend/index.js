@@ -4,7 +4,59 @@ let usedram = ""
 let totalram = ""
 let freeram = ""
 
+
+
+function login(){
+  let user = document.getElementById("inputUser").value
+  let pass = document.getElementById("inputPassword").value
+  let existe = false
+  $.getJSON("users.json", function(datos) {
+    datos.users.forEach(element => {
+      if(element.id == user && element.pass==pass){
+        existe = true
+      }
+    });
+    
+    if(existe){
+      $.ajax({
+        type:"GET",
+        url:ip+"ram",
+        crossDomain:true,
+        success : function(data){
+          var json = JSON.parse(JSON.stringify(data).replace("RowDataPacket ",""));
+          sessionStorage.setItem("totalram", json.total+",");
+          sessionStorage.setItem("ejex", ""+",");
+          sessionStorage.setItem("usedram", json.used+",");
+          sessionStorage.setItem("freeram", json.free+",");
+          sessionStorage.setItem("user", user)
+          sessionStorage.setItem("logueado", 1)
+          window.location.href = "Principal.html";
+        }
+      });
+      
+    }else{alert('nein')}
+  });
+}
+
+
+
+function verificar(){
+  let logueado = sessionStorage.getItem("logueado")
+  if (Number(logueado)==0) return false
+  return true
+}
+
+function loadlogin(){
+  if (verificar()) window.location.href = "Principal.html";
+}
+
+function loadprincipal(){
+  if (!verificar()) window.location.href = "Login.html";
+}
+
+
 function cargarram(){
+  if (!verificar()) window.location.href = "Login.html";
   ejex = sessionStorage.getItem("ejex");
   usedram = sessionStorage.getItem("usedram");
   totalram = sessionStorage.getItem("totalram");
@@ -29,9 +81,11 @@ function cargarram(){
         
         pintargraph(ejex.split(","),usedram.split(","),totalram.split(","),freeram.split(","))
         
+        let porcentaje = (Number(json.used) * 100 / Number(json.total)).toFixed(4) 
+
         document.getElementById("input_used").value = json.used + "  MB"
         document.getElementById("input_total").value = json.total + "  MB"
-        document.getElementById("input_free").value = json.free + "  MB"
+        document.getElementById("input_free").value = porcentaje + "  %"
         
         sessionStorage.setItem("ejex", ejex);
         sessionStorage.setItem("usedram", usedram);
@@ -42,55 +96,14 @@ function cargarram(){
     }
   });
 }
-
-
-
-function cargarcpu(){
+function cerrarsesion(){
   sessionStorage.clear("ejex");
   sessionStorage.clear("usedram");
   sessionStorage.clear("totalram");
   sessionStorage.clear("freeram");
-  console.log("cargarcpu")
-  $.ajax({
-    type: "GET",
-    url: ip+"cpu",
-    success : function(data){
-      console.log("data")
-      console.log(data)
-    }
-  });
-}
-
-function LlenarDatos(datos){
-  let toJSON = datos
-  let proccont=0
-  let ejeccont=0
-  let zombiecont=0
-  let stopcont=0
-  let suspendcont=0
-  console.log("data")
-  console.log(datos)
-  return "Success"
-
-  toJSON.forEach(element => {
-    proccont ++
-    if(element.estado == "SLEEP") stopcont ++
-    else if(element.estado == "IDLE") suspendcont ++
-    else if(element.estado == "RUNNING") ejeccont ++
-    else if(element.estado == "ZOMBIE") zombiecont ++
-    element.children.forEach(hijo =>{
-      proccont ++
-      if(hijo.estado == "SLEEP") stopcont ++
-      else if(hijo.estado == "IDLE") suspendcont ++
-      else if(hijo.estado == "RUNNING") ejeccont ++
-      else if(hijo.estado == "ZOMBIE") zombiecont ++
-    });
-  });
-  document.getElementById("input_total").value = proccont
-  document.getElementById("input_ejecucion").value = ejeccont
-  document.getElementById("input_detenidos").value = stopcont
-  document.getElementById("input_suspendidos").value = suspendcont
-  document.getElementById("input_zombies").value = zombiecont
+  sessionStorage.clear("user");
+  sessionStorage.setItem("logueado",0);
+  window.location.href = "Login.html";
 }
 
 function pintargraph(varejex,varused,vartotal,varfree){

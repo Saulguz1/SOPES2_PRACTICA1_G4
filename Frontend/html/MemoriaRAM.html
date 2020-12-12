@@ -11,6 +11,7 @@
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
         <script src="../index.js"></script>
+        
     </head>
     <style>
         body {
@@ -37,7 +38,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="ProcesosCPU.html">Procesos CPU</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Login.html">Cerrar Sesion</a>
+                        <a class="dropdown-item" onclick="cerrarsesion()">Cerrar Sesion</a>
                     </div>
                 </li>
             </ul>
@@ -56,7 +57,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Procesos CPU
                             </a>
-                            <a class="nav-link" href="Login.html">
+                            <a class="nav-link" onclick="cerrarsesion()">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Cerrar Sesion
                             </a>
@@ -74,7 +75,7 @@
                 <main>
                     <div class="container-fluid">
                           
-                        <!--<meta http-equiv="refresh" content="5;url=MemoriaRAM.html" />-->
+                        <meta http-equiv="refresh" content="5;url=MemoriaRAM.html" />
                         <div id="layoutSidenav_content">
                             <main>
                                 <div class="container-fluid">
@@ -98,7 +99,7 @@
                                             <div>
                                                 <b>Used: </b> <input id="input_used" class="input" name="input_used" disabled>
                                                 <b>Total:</b> <input id="input_total" class="input" name="input_total" disabled>
-                                                <b>Free :</b> <input id="input_free" class="input" name="input_free" disabled>
+                                                <b>Porcentaje Uso :</b> <input id="input_free" class="input" name="input_free" disabled>
                                             </div>
                                             <br>
                                         </div>

@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id":"admin",
+      "pass":"soyadmin"
+    },
+    {
+      "id":"noadmin",
+      "pass":"quieroseradmin"
+    }
+  ]
+}

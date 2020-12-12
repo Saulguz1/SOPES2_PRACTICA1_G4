@@ -1,10 +1,16 @@
 const ip = 'http://34.69.2.19/'
 
+
+function cerrarsesion(){
+  sessionStorage.clear("ejex");
+  sessionStorage.clear("usedram");
+  sessionStorage.clear("totalram");
+  sessionStorage.clear("freeram");
+  window.location.href = "Login.html";
+}
+
 function cargarcpu(){
-    sessionStorage.clear("ejex");
-    sessionStorage.clear("usedram");
-    sessionStorage.clear("totalram");
-    sessionStorage.clear("freeram");
+  if (!verificar()) window.location.href = "Login.html"
     console.log("cargarcpu")
     $.ajax({
       type: "GET",
@@ -23,15 +29,11 @@ function cargarcpu(){
     });
 }
 
-
-function lee_json() {
-    let cont = 0
-    $.getJSON("prueba.json", function(datos) {
-        LlenarDatos(datos)
-        LlenarTabla(datos)
-    });
+function verificar(){
+  let logueado = sessionStorage.getItem("logueado")
+  if (Number(logueado)==0) return false
+  return true
 }
-
 
 function LlenarDatos(datos){
     let toJSON = datos
@@ -65,6 +67,10 @@ function LlenarDatos(datos){
 
   function LlenarTabla(datos){
     let toJSON = datos
+    let totalram = "".concat(sessionStorage.getItem("totalram"))
+    totalram = totalram.split(",")
+    totalram.pop()
+    totalram=totalram.pop()
     var tbody = document.getElementById('tbody');
     let html = ""
     toJSON.root.forEach(element => {
@@ -73,17 +79,27 @@ function LlenarDatos(datos){
         html+="<td>"+element.nombre+"</td>\n"
         html+="<td>"+element.usuario+"</td>\n"
         html+="<td>"+element.estado+"</td>\n"
-        html+="<td>"+element.RAM+"</td>\n"
-        html+= "<td><button class='btn btn-primary btn-block'  type='button' name="+element.PID+" id="+element.PID+" value="+element.PID+" onclick=killproc("+element.PID+")>KILL</button></td>"
+        let porcentaje = (Number(element.RAM) * 100 / Number(totalram)).toFixed(4) 
+        html+="<td>"+porcentaje+"</td>\n"
+        html+= "<td><button class='btn btn-primary btn-block'  type='submit' name="+element.PID+" id="+element.PID+" value="+element.PID+" onclick=killproc("+element.PID+")>KILL</button></td>"
         html+="</tr>\n"
         element.children.forEach(hijo =>{
+          html+='<tr style="background-color: darksalmon;">\n'
+          html+="<td>"+hijo.PID+"</td>\n"
+          html+="<td>"+hijo.nombre+"</td>\n"
+          html+="<td>"+hijo.usuario+"</td>\n"
+          html+="<td>"+hijo.estado+"</td>\n"
+          porcentaje = (Number(hijo.RAM) * 100 / Number(totalram)).toFixed(4) 
+          html+="<td>"+porcentaje+"</td>\n"
+          html+= "<td><button class='btn btn-primary btn-block'  type='submit' name="+hijo.PID+" id="+hijo.PID+" value="+hijo.PID+" onclick=killproc("+hijo.PID+")>KILL</button></td>"
+          html+="</tr>\n"
         });
     });
     tbody.innerHTML = html;
   }
 
 function killproc(PID){
-    alert(PID)
+    alert("Kill proc: "+PID)
     $.ajax({
         url: ip+"kill",
         type:"POST",
@@ -94,6 +110,7 @@ function killproc(PID){
         data: "".concat(PID),
         success: function(response){
             console.log(response);
+            alert(response)
         },
         error : function(errorThrown,err,textStatus){
             console.log(textStatus)
