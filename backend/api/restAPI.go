@@ -52,7 +52,6 @@ func getCPU(w http.ResponseWriter, r *http.Request) {
 	text := string(content)
 	s := []rune(text)
 	s[len(text)-3] = ' '
-	log.Println(string(s))
 
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, string(s))
