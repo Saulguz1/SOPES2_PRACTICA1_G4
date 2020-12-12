@@ -144,9 +144,13 @@ Fin.
 - Metodos Gets y Post
 
     Estos son los metodos que se utilizaron tanto para la peticion de la memoria ram, procesos del cpu y para poder crear la funcion de post para hacer KILL a un proceso
+
     ![](./images/getram.jpg)
+
     ![](./images/getpros.jpg)
+
     ![](./images/postkill.jpg)
+    
 
 ---
 > ### Backend
