@@ -82,12 +82,72 @@
 
 ## Algoritmo
 
+> A continuacion se detallara el algoritmo de la aplicacion.
+
+Inicio
+-	Aplicación Cliente:
+    - Login:
+        - El administrador ingresa sus credenciales
+        - ingresa a la pagina principal
+    -	Pagina Principal:
+        - Se muestran los datos de los desarrolladores
+        - El menu tiene varias opciones
+            - Memoria RAM
+                - Se muestra una grafica de puntos lineales donde se puede observar la memoria total, memoria usada y la memoria disponible, asi tambien como una tabla con la ultima informacion requerida.
+            - Procesos de CPU
+                - Aqui se muestra la informacion de la cantidad de procesos ejecutados, detenidos, suspendidos y zombies.
+                - Se muestra el arbol de procesos como una tabla , Los de color verde son procesos padre y los de color rojo los procesos hijo.
+    - Cerrar Sesion
+        - El usuario regresa a la pagina del login.
+
+Fin.
+
+
 ---
 ---
 
 ## Desarrollo de la Configuracion
 ---
 > ### Frontend
+
+- Vistas
+
+    Se crearon las diferentes vistas utilizando HTML y Javascript , junto con estilos de Boopstrap los cuales permitieron tener una interfaz agradable y dinamica al usuario.
+    - Login 
+
+    Codigo para crear la vista de la aplicacion.
+    ![](./images/logincode.jpg)
+    - Pagina Principal
+    
+    Codigo para la creacion de la vista de la pagina principal
+    ![](./images/principalcode.jpg)
+    - Memoria Ram
+    
+    Codigo para la creacion de la vista de la memoria ram
+    ![](./images/memoriacode.jpg)
+    Aqui algunas funciones que se utilizaron para la creacion de la grafica y poder obtener los datos de la memoria ram
+    ![](./images/funcionesram.jpg)
+    - Procesos de CPU
+
+    Codigo para la creacion de la vista de los procesos del CPU
+    ![](./images/procesoscode.jpg)
+    Aqui algunas funciones que se utilizaron para la creacion y rellenadod de las tablas del arbol de procesos
+    ![](./images/funciones.jpg)
+    
+
+- Usuarios
+
+    Para los usuarios se creo un archivo .json en el cual nos permite tener solo almacenados los usuarios verificados.
+    ![](./images/admincode.jpg)
+    
+
+- Metodos Gets y Post
+
+    Estos son los metodos que se utilizaron tanto para la peticion de la memoria ram, procesos del cpu y para poder crear la funcion de post para hacer KILL a un proceso
+    ![](./images/getram.jpg)
+    ![](./images/getpros.jpg)
+    ![](./images/postkill.jpg)
+
 ---
 > ### Backend
 
@@ -96,5 +156,11 @@
 
 ## Logica y Funcionalidad de la aplicacion
 
+1. El usuario administrador inica sesion
+2. Es redirigido a la pagina principal donde se muestra el menu y los datos de los desarrolladores.
+3. Se observa la grafica y los datos del monitoreo de la memoria RAM , este se actualiza cada 5 segundos.
+4. Se puede observar tambien la tabla de arbol de procesos junto a la cantidad de los procesos actualmente con su respectivo estado. 
+5. Se puede elegir hacer `KILL` a un proceso ya sea padre o hijo desde la tabla de procesos
+6. Cerrar Sesion
 ---
 ---
