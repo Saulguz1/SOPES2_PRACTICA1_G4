@@ -16,6 +16,7 @@ var ramFilePath = "/proc/m_grupo4"
 var cpuFilePath = "/proc/p_grupo4"
 
 func home(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprintf(w, "SO2 Practica 1.")
 }
 
@@ -34,6 +35,7 @@ func getRAM(w http.ResponseWriter, r *http.Request) {
 	log.Println(text)
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprintf(w, text)
 }
 
@@ -54,6 +56,7 @@ func getCPU(w http.ResponseWriter, r *http.Request) {
 	s[len(text)-3] = ' '
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprintf(w, string(s))
 }
 
@@ -74,6 +77,8 @@ func killProcess(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Error killing process with PID: %+v", pid)
 		return
 	}
+
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	fmt.Fprintf(w, "Process with PID %+v killed.", pid)
 }
