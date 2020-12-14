@@ -25,9 +25,9 @@
 
 - Descripcion de la Aplicacion 
 
-- Algoritmo 
+- Flujo de la aplicación 
 
-- Desarrollo de la Configuracion
+- Desarrollo de la Aplicación
     - Frontend
     - Backend
 
@@ -80,9 +80,9 @@
 ---
 ---
 
-## Algoritmo
+## Flujo de la aplicación
 
-> A continuacion se detallara el algoritmo de la aplicacion.
+> A continuacion se detallara el flujo de la aplicacion.
 
 Inicio
 -	Aplicación Cliente:
@@ -104,9 +104,8 @@ Fin.
 
 
 ---
----
 
-## Desarrollo de la Configuracion
+## Desarrollo de la Aplicación
 ---
 > ### Frontend
 
@@ -154,6 +153,48 @@ Fin.
 
 ---
 > ### Backend
+
+- ### Máquinas virtuales
+
+    Se crearon 2 máquinas virtuales en Google Cloud Platform, una para hospedar los módulos de kernel y el servidor web para el REST API, y el segundo para hospedar el Frontend de la aplicación.
+
+    Ambas máquinas son de tipo E2 Standard con las siguientes características:
+    
+        - Procesador Intel Haswell
+        - 16GB de RAM
+        - 10GB de SSD
+        - SO Debian 10.
+
+    ![](./images/vms.png)
+
+
+- ### Módulos de Kernel
+
+    - __Módulo de RAM__
+    
+        Módulo de Kernel creado para mostrar información relacionada a la RAM de la VM.  Utiliza la Struct __`sysinfo`__ para obtener la memoria total, libre y en utilización.
+        La información es mostrada en formato `JSON`
+
+    - __Módulo de CPU__
+
+        Módulo de Kernel creado para mostrar información relacionada a los procesos que corren en el CPU. Utiliza la Sstruct __`task_struct`__ para obtener la información de los procesos.
+        Muestra información de procesos corriendo, dormidos, muertos y zombies.
+        La información es mostrada en formato `JSON`.
+
+
+    _Para poder utilizar los módulos, es necesario compilarlos e instalarlos en el kernel del sistema operativo._
+
+- ### REST API
+
+    Para la creación del REST API se utilizó el lenguaje de programación __`Golang`__, creando un pequeño servidor web compuesto por 3 endpoints.
+
+        - /ram: Método HTTP GET para obtener la información del módulo de kernel RAM.
+        
+        - /cpu: Método HTTP GET para obtener la información del módulo de kernel CPU.
+
+        - /kill: Método HTTP POST para enviar un Process ID al servidor web para proceder a matarlo enviando una señal de `kill -9` al sistema operativo.
+
+
 
 ---
 ---
